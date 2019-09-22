@@ -1,0 +1,73 @@
+{
+    "name": "@ticket721/e712",
+    "version": "0.1.6",
+    "description": "Pure Typescript/Javascript implementation of the Ethereum Improvement Proposal 712",
+    "keywords": [
+        "ethereum",
+        "eip712",
+        "signature",
+        "eccrypto"
+    ],
+    "author": "Iulian Rotaru <iulian@rotaru.fr> (mortimr)",
+    "homepage": "https://github.com/ticket721/e712/README.md",
+    "license": "MIT",
+    "main": "lib/index.js",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/ticket721/e712.git"
+    },
+    "nyc": {
+        "extends": "@istanbuljs/nyc-config-typescript",
+        "all": true,
+        "reporter": [
+            "text",
+            "lcov"
+        ],
+        "include": [
+            "sources/**.ts"
+        ],
+        "exclude": [
+            "sources/index.ts",
+            "sources/**.test.ts"
+        ]
+    },
+    "scripts": {
+        "build": "rm -rf lib && tsc",
+        "test:mocha": "nyc ts-mocha ./sources/**.test.ts",
+        "test:lint": "tslint --project .",
+        "editorconfig-cli": "editorconfig-cli",
+        "test:editorconfig": "npm run editorconfig-cli",
+        "coverage:upload": "cat ./coverage/lcov.info | coveralls",
+        "doc": "typedoc --theme markdown --excludePrivate --readme ./README.md"
+    },
+    "editorconfig-cli": [
+        "./package.json",
+        "./tsconfig.json",
+        "./tslint.json",
+        "./sources/**.ts"
+    ],
+    "bugs": {
+        "url": "https://github.com/ticket721/e712/issues"
+    },
+    "dependencies": {
+        "bn.js": "^5.0.0",
+        "ethers": "^4.0.36"
+    },
+    "devDependencies": {
+        "@htmlacademy/editorconfig-cli": "^1.0.0",
+        "@istanbuljs/nyc-config-typescript": "^0.1.3",
+        "@types/mocha": "^5.2.7",
+        "@types/node": "^12.7.2",
+        "chai": "^4.2.0",
+        "coveralls": "^3.0.6",
+        "eth-sig-util": "^2.4.0",
+        "linted": "^1.0.5",
+        "mocha": "^6.2.0",
+        "nyc": "^14.1.1",
+        "ts-mocha": "^6.0.0",
+        "tslint": "^5.19.0",
+        "typedoc": "^0.15.0",
+        "typedoc-plugin-markdown": "^2.1.4",
+        "typescript": "^3.5.3"
+    }
+}

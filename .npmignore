@@ -1,0 +1,13 @@
+.idea
+node_modules
+.todos.json
+sources
+coverage
+package-lock.json
+imgs
+.nyc_output
+.editorconfig
+tslint.json
+tsconfig.json
+README.md
+docs
