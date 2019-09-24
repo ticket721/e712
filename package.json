@@ -70,6 +70,15 @@
         "tslint": "^5.19.0",
         "typedoc": "^0.15.0",
         "typedoc-plugin-markdown": "^2.1.4",
-        "typescript": "^3.5.3"
+        "typescript": "^3.5.3",
+        "@commitlint/cli": "^7.5.2",
+        "@commitlint/config-conventional": "^7.5.0",
+        "conventional-changelog-cli": "^2.0.12"
+    },
+    "husky": {
+        "hooks": {
+            "pre-commit": "editorconfig-cli",
+            "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+        }
     }
 }
