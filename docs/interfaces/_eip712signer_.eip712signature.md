@@ -1,6 +1,4 @@
-**[@ticket721/e712](../README.md)**
-
-[Globals](../globals.md) › ["EIP712Signer"](../modules/_eip712signer_.md) › [EIP712Signature](_eip712signer_.eip712signature.md)
+[@ticket721/e712](../README.md) › [Globals](../globals.md) › ["EIP712Signer"](../modules/_eip712signer_.md) › [EIP712Signature](_eip712signer_.eip712signature.md)
 
 # Interface: EIP712Signature
 
@@ -23,7 +21,7 @@
 
 • **hex**: *string*
 
-*Defined in [EIP712Signer.ts:40](https://github.com/ticket721/env/blob/f8a7220/packages/e712/sources/EIP712Signer.ts#L40)*
+*Defined in [EIP712Signer.ts:40](https://github.com/ticket721/e712/blob/8005f8c/sources/EIP712Signer.ts#L40)*
 
 ___
 
@@ -31,7 +29,7 @@ ___
 
 • **r**: *string*
 
-*Defined in [EIP712Signer.ts:43](https://github.com/ticket721/env/blob/f8a7220/packages/e712/sources/EIP712Signer.ts#L43)*
+*Defined in [EIP712Signer.ts:43](https://github.com/ticket721/e712/blob/8005f8c/sources/EIP712Signer.ts#L43)*
 
 ___
 
@@ -39,7 +37,7 @@ ___
 
 • **s**: *string*
 
-*Defined in [EIP712Signer.ts:42](https://github.com/ticket721/env/blob/f8a7220/packages/e712/sources/EIP712Signer.ts#L42)*
+*Defined in [EIP712Signer.ts:42](https://github.com/ticket721/e712/blob/8005f8c/sources/EIP712Signer.ts#L42)*
 
 ___
 
@@ -47,4 +45,4 @@ ___
 
 • **v**: *number*
 
-*Defined in [EIP712Signer.ts:41](https://github.com/ticket721/env/blob/f8a7220/packages/e712/sources/EIP712Signer.ts#L41)*
+*Defined in [EIP712Signer.ts:41](https://github.com/ticket721/e712/blob/8005f8c/sources/EIP712Signer.ts#L41)*

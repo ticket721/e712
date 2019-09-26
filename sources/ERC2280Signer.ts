@@ -5,7 +5,7 @@ import { utils }                                                                
 /**
  * @ignore
  */
-export const MTKNTypes: { [key: string]: EIP712StructField[] } = {
+export const ERC2280Types: { [key: string]: EIP712StructField[] } = {
     EIP712Domain: EIP712DomainType,
 
     mActors: [
@@ -106,12 +106,12 @@ export const MTKNTypes: { [key: string]: EIP712StructField[] } = {
     ]
 };
 
-export interface MTKNActors {
+export interface ERC2280Actors {
     signer: string;
     relayer: string;
 }
 
-export interface MTKNTxParams {
+export interface ERC2280TxParams {
     nonce: number | BN;
     gasLimit: number | BN;
     gasPrice: number | BN;
@@ -119,9 +119,9 @@ export interface MTKNTxParams {
 }
 
 /**
- * @description Helper class to generate mTKN signatures
+ * @description Helper class to generate ERC2280 signatures
  */
-export class MTKNSigner extends EIP712Signer {
+export class ERC2280Signer extends EIP712Signer {
     constructor(domain_name: string, domain_version: string, domain_chain_id: number, domain_contract: string) {
         super({
                 name: domain_name,
@@ -129,11 +129,11 @@ export class MTKNSigner extends EIP712Signer {
                 chainId: domain_chain_id,
                 verifyingContract: domain_contract
             },
-            ['mActors', MTKNTypes.mActors],
-            ['mTxParams', MTKNTypes.mTxParams],
-            ['mTransfer', MTKNTypes.mTransfer],
-            ['mApprove', MTKNTypes.mApprove],
-            ['mTransferFrom', MTKNTypes.mTransferFrom],
+            ['mActors', ERC2280Types.mActors],
+            ['mTxParams', ERC2280Types.mTxParams],
+            ['mTransfer', ERC2280Types.mTransfer],
+            ['mApprove', ERC2280Types.mApprove],
+            ['mTransferFrom', ERC2280Types.mTransferFrom],
         );
     }
 
@@ -146,7 +146,7 @@ export class MTKNSigner extends EIP712Signer {
      * @param txparams
      * @param private_key If provided, generates signature, otherwise generates payload
      */
-    public async transfer(recipient: string, amount: number | BN, actors: MTKNActors, txparams: MTKNTxParams, private_key?: string): Promise<EIP712Signature | EIP712Payload> {
+    public async transfer(recipient: string, amount: number | BN, actors: ERC2280Actors, txparams: ERC2280TxParams, private_key?: string): Promise<EIP712Signature | EIP712Payload> {
         if (private_key) {
 
             return this.sign(private_key, this.generatePayload({
@@ -177,7 +177,7 @@ export class MTKNSigner extends EIP712Signer {
      * @param txparams
      * @param signature
      */
-    public async verifyTransfer(recipient: string, amount: number | BN, actors: MTKNActors, txparams: MTKNTxParams, signature: string): Promise<boolean> {
+    public async verifyTransfer(recipient: string, amount: number | BN, actors: ERC2280Actors, txparams: ERC2280TxParams, signature: string): Promise<boolean> {
 
         const payload = this.generatePayload({
             recipient,
@@ -200,7 +200,7 @@ export class MTKNSigner extends EIP712Signer {
      * @param txparams
      * @param private_key If provided, generates signature, otherwise generates payload
      */
-    public async approve(spender: string, amount: number | BN, actors: MTKNActors, txparams: MTKNTxParams, private_key?: string): Promise<EIP712Signature | EIP712Payload> {
+    public async approve(spender: string, amount: number | BN, actors: ERC2280Actors, txparams: ERC2280TxParams, private_key?: string): Promise<EIP712Signature | EIP712Payload> {
         if (private_key) {
 
             return this.sign(private_key, this.generatePayload({
@@ -231,7 +231,7 @@ export class MTKNSigner extends EIP712Signer {
      * @param txparams
      * @param signature
      */
-    public async verifyApprove(spender: string, amount: number | BN, actors: MTKNActors, txparams: MTKNTxParams, signature: string): Promise<boolean> {
+    public async verifyApprove(spender: string, amount: number | BN, actors: ERC2280Actors, txparams: ERC2280TxParams, signature: string): Promise<boolean> {
 
         const payload = this.generatePayload({
             spender,
@@ -255,7 +255,7 @@ export class MTKNSigner extends EIP712Signer {
      * @param txparams
      * @param private_key If provided, generates signature, otherwise generates payload
      */
-    public async transferFrom(sender: string, recipient: string, amount: number | BN, actors: MTKNActors, txparams: MTKNTxParams, private_key?: string): Promise<EIP712Signature | EIP712Payload> {
+    public async transferFrom(sender: string, recipient: string, amount: number | BN, actors: ERC2280Actors, txparams: ERC2280TxParams, private_key?: string): Promise<EIP712Signature | EIP712Payload> {
         if (private_key) {
 
             return this.sign(private_key, this.generatePayload({
@@ -289,7 +289,7 @@ export class MTKNSigner extends EIP712Signer {
      * @param txparams
      * @param signature
      */
-    public async verifyTransferFrom(sender: string, recipient: string, amount: number | BN, actors: MTKNActors, txparams: MTKNTxParams, signature: string): Promise<boolean> {
+    public async verifyTransferFrom(sender: string, recipient: string, amount: number | BN, actors: ERC2280Actors, txparams: ERC2280TxParams, signature: string): Promise<boolean> {
 
         const payload = this.generatePayload({
             sender,
