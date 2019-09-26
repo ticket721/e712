@@ -1,6 +1,4 @@
-**[@ticket721/e712](../README.md)**
-
-[Globals](../globals.md) › ["EIP712Signer"](../modules/_eip712signer_.md) › [EIP712Domain](_eip712signer_.eip712domain.md)
+[@ticket721/e712](../README.md) › [Globals](../globals.md) › ["EIP712Signer"](../modules/_eip712signer_.md) › [EIP712Domain](_eip712signer_.eip712domain.md)
 
 # Interface: EIP712Domain
 
@@ -25,7 +23,7 @@ Interface of the EIP712Domain structure
 
 • **chainId**: *number | BN*
 
-*Defined in [EIP712Signer.ts:23](https://github.com/ticket721/env/blob/f8a7220/packages/e712/sources/EIP712Signer.ts#L23)*
+*Defined in [EIP712Signer.ts:23](https://github.com/ticket721/e712/blob/8005f8c/sources/EIP712Signer.ts#L23)*
 
 ___
 
@@ -33,7 +31,7 @@ ___
 
 • **name**: *string*
 
-*Defined in [EIP712Signer.ts:21](https://github.com/ticket721/env/blob/f8a7220/packages/e712/sources/EIP712Signer.ts#L21)*
+*Defined in [EIP712Signer.ts:21](https://github.com/ticket721/e712/blob/8005f8c/sources/EIP712Signer.ts#L21)*
 
 ___
 
@@ -41,7 +39,7 @@ ___
 
 • **verifyingContract**: *string*
 
-*Defined in [EIP712Signer.ts:24](https://github.com/ticket721/env/blob/f8a7220/packages/e712/sources/EIP712Signer.ts#L24)*
+*Defined in [EIP712Signer.ts:24](https://github.com/ticket721/e712/blob/8005f8c/sources/EIP712Signer.ts#L24)*
 
 ___
 
@@ -49,4 +47,4 @@ ___
 
 • **version**: *string*
 
-*Defined in [EIP712Signer.ts:22](https://github.com/ticket721/env/blob/f8a7220/packages/e712/sources/EIP712Signer.ts#L22)*
+*Defined in [EIP712Signer.ts:22](https://github.com/ticket721/e712/blob/8005f8c/sources/EIP712Signer.ts#L22)*

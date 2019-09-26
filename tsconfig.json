@@ -15,6 +15,6 @@
     "include": [
         "./sources/index.ts",
         "./sources/EIP712Signer.ts",
-        "./sources/MTKNSigner.ts"
+        "./sources/ERC2280Signer.ts"
     ]
 }

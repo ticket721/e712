@@ -20,7 +20,7 @@ Have a complete library to issue EIP712 signature, verify them, or simply encode
 
 You can find the documentation for the modules here:
 - [EIP712Signer](./packages/e712/docs/modules/_eip712signer_.md), the base class to generate signatures
-- [MTKNSigner](./packages/e712/docs/modules/_mtknsigner_.md), extension of the `EIP712Signer` base class to make a mTKN helper
+- [ERC2280Signer](./packages/e712/docs/modules/_erc2280signer_.md), extension of the `EIP712Signer` base class to make a ERC2280 helper
 
 ## Usage
 
@@ -202,18 +202,18 @@ web3.currentProvider.sendAsync({
 
 ```
 
-## MTKNSigner
+## ERC2280Signer
 
-A helper class documented [here](./packages/e712/docs/modules/_mtknsigner_.md). It generates signatures for the three main methods `signedTransfer`, `signedApprove` and `signedTransferFrom` and provides signature verifiers.
+A helper class documented [here](./packages/e712/docs/modules/_ERC2280signer_.md). It generates signatures for the three main methods `signedTransfer`, `signedApprove` and `signedTransferFrom` and provides signature verifiers.
 
 ### Example: with private key available
 
 ```typescript
-import { MTKNSigner, EIP712Signature }    from '@ticket721/e712';
+import { ERC2280Signer, EIP712Signature }    from '@ticket721/e712';
 import { Wallet }                         from 'ethers';
 import { BN }                             from 'bn.js';
 
-const domain_name = 'my mtkn';
+const domain_name = 'my ERC2280';
 const domain_version = '1';
 const domain_chain_id = 1;
 const domain_contract = '0xd0a21D06befee2C5851EbafbcB1131d35B135e87';
@@ -223,13 +223,13 @@ const address_zero = '0x0000000000000000000000000000000000000000';
 
 
 // Build helper class
-const mtkn = new MTKNSigner(domain_name, domain_version, domain_chain_id, domain_contract);
+const ERC2280 = new ERC2280Signer(domain_name, domain_version, domain_chain_id, domain_contract);
 
 // Use your own private keys
 const wallet = Wallet.createRandom();
 
 // Generate proof
-const sig: EIP712Signature = await mtkn.transfer(transfer_recipient, new BN(1000), {
+const sig: EIP712Signature = await ERC2280.transfer(transfer_recipient, new BN(1000), {
     signer: wallet.address,
     relayer: address_zero
 }, {
@@ -240,7 +240,7 @@ const sig: EIP712Signature = await mtkn.transfer(transfer_recipient, new BN(1000
 }, wallet.privateKey) as EIP712Signature;
 
 // Verify proofs
-const verification = await mtkn.verifyTransfer(transfer_recipient, new BN(1000), {
+const verification = await ERC2280.verifyTransfer(transfer_recipient, new BN(1000), {
     signer: wallet.address,
     relayer: address_zero
 }, {
@@ -255,10 +255,10 @@ const verification = await mtkn.verifyTransfer(transfer_recipient, new BN(1000),
 ### Example: sign with web3 browser
 
 ```typescript
-import { MTKNSigner, EIP712Payload }    from '@ticket721/e712';
+import { ERC2280Signer, EIP712Payload }    from '@ticket721/e712';
 import { BN }                             from 'bn.js';
 
-const domain_name = 'my mtkn';
+const domain_name = 'my ERC2280';
 const domain_version = '1';
 const domain_chain_id = 1;
 const domain_contract = '0xd0a21D06befee2C5851EbafbcB1131d35B135e87';
@@ -269,10 +269,10 @@ const address_zero = '0x0000000000000000000000000000000000000000';
 const my_web3_browser_address = '0x19C8239E04ceA1B1C0342E6da5cF3a5Ca54874e1';
 
 // Build helper class
-const mtkn = new MTKNSigner(domain_name, domain_version, domain_chain_id, domain_contract);
+const ERC2280 = new ERC2280Signer(domain_name, domain_version, domain_chain_id, domain_contract);
 
 // Generate ready-to-sign payload
-const payload: EIP712Payload = await mtkn.transfer(transfer_recipient, new BN(1000), {
+const payload: EIP712Payload = await ERC2280.transfer(transfer_recipient, new BN(1000), {
     signer: my_web3_browser_address,
     relayer: address_zero
 }, {

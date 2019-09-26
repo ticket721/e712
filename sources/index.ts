@@ -3,5 +3,5 @@ export {
 } from './EIP712Signer';
 
 export {
-    MTKNTypes, MTKNSigner, MTKNTxParams, MTKNActors
-} from './MTKNSigner';
+    ERC2280Types, ERC2280Signer, ERC2280TxParams, ERC2280Actors
+} from './ERC2280Signer';

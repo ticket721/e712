@@ -1,12 +1,16 @@
-**[@ticket721/e712](README.md)**
+[@ticket721/e712](README.md) › [Globals](globals.md)
 
-[Globals](globals.md)
+# @ticket721/e712
 
 <p align="center">
-  <img src="https://github.com/ticket721/env/raw/develop/packages/e712/imgs/title.png">
+  <img src="https://github.com/ticket721/e712/raw/master/.assets/logo.png">
 </p>
 
 # Pure Typescript/Javascript implementation of the Ethereum Improvement Proposal 712
+
+| Build | Status |
+| :---: | :----: |
+| Coveralls | [![Coverage Status](https://coveralls.io/repos/github/ticket721/e712/badge.svg?branch=)](https://coveralls.io/github/ticket721/e712?branch=)|
 
 ## Motivation
 
@@ -180,7 +184,7 @@ console.log('Signature signed by ', signer);
 To sign with a third party wallet provider (let's say metamask), just run the following
 
 <p align="center">
-<img height="500" src="https://github.com/ticket721/env/raw/develop/packages/e712/imgs/metamask.png">
+<img height="500" src="https://github.com/ticket721/e712/raw/master/.assets/metamask.png">
 </p>
 
 ```typescript
