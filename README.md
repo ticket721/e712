@@ -19,12 +19,12 @@ Have a complete library to issue EIP712 signature, verify them, or simply encode
 ## Documentation
 
 You can find the documentation for the modules here:
-- [EIP712Signer](./packages/e712/docs/modules/_eip712signer_.md), the base class to generate signatures
-- [ERC2280Signer](./packages/e712/docs/modules/_erc2280signer_.md), extension of the `EIP712Signer` base class to make a ERC2280 helper
+- [EIP712Signer](./docs/modules/_eip712signer_.md), the base class to generate signatures
+- [ERC2280Signer](./docs/modules/_erc2280signer_.md), extension of the `EIP712Signer` base class to make a ERC2280 helper
 
 ## Usage
 
-For a live usage, take a look at [the last test](./packages/e712/sources/EIP712.test.ts).
+For a live usage, take a look at [the last test](./sources/EIP712.test.ts).
 
 ### Setup
 
@@ -204,7 +204,7 @@ web3.currentProvider.sendAsync({
 
 ## ERC2280Signer
 
-A helper class documented [here](./packages/e712/docs/modules/_ERC2280signer_.md). It generates signatures for the three main methods `signedTransfer`, `signedApprove` and `signedTransferFrom` and provides signature verifiers.
+A helper class documented [here](./docs/modules/_erc2280signer_.md). It generates signatures for the three main methods `signedTransfer`, `signedApprove` and `signedTransferFrom` and provides signature verifiers.
 
 ### Example: with private key available
 
