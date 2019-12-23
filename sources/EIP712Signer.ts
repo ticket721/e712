@@ -1,5 +1,5 @@
 import { utils } from 'ethers';
-import { BN } from 'bn.js';
+import BN from 'bn.js';
 
 /**
  * Field in a User Defined Types

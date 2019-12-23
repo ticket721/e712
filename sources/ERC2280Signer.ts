@@ -1,5 +1,5 @@
 import { EIP712DomainType, EIP712Payload, EIP712Signature, EIP712Signer, EIP712StructField } from './EIP712Signer';
-import { BN }                                                                                from 'bn.js';
+import BN                                                                                    from 'bn.js';
 import { utils }                                                                             from 'ethers';
 
 /**
@@ -11,99 +11,99 @@ export const ERC2280Types: { [key: string]: EIP712StructField[] } = {
     mActors: [
         {
             name: 'signer',
-            type: 'address'
+            type: 'address',
         },
         {
             name: 'relayer',
-            type: 'address'
-        }
+            type: 'address',
+        },
     ],
 
     mTxParams: [
         {
             name: 'nonce',
-            type: 'uint256'
+            type: 'uint256',
         },
         {
             name: 'gasLimit',
-            type: 'uint256'
+            type: 'uint256',
         },
         {
             name: 'gasPrice',
-            type: 'uint256'
+            type: 'uint256',
         },
         {
             name: 'reward',
-            type: 'uint256'
-        }
+            type: 'uint256',
+        },
     ],
 
     mTransfer: [
         {
             name: 'recipient',
-            type: 'address'
+            type: 'address',
         },
         {
             name: 'amount',
-            type: 'uint256'
+            type: 'uint256',
         },
 
         {
             name: 'actors',
-            type: 'mActors'
+            type: 'mActors',
         },
 
         {
             name: 'txparams',
-            type: 'mTxParams'
-        }
+            type: 'mTxParams',
+        },
     ],
 
     mApprove: [
         {
             name: 'spender',
-            type: 'address'
+            type: 'address',
         },
         {
             name: 'amount',
-            type: 'uint256'
+            type: 'uint256',
         },
 
         {
             name: 'actors',
-            type: 'mActors'
+            type: 'mActors',
         },
 
         {
             name: 'txparams',
-            type: 'mTxParams'
-        }
+            type: 'mTxParams',
+        },
     ],
 
     mTransferFrom: [
         {
             name: 'sender',
-            type: 'address'
+            type: 'address',
         },
         {
             name: 'recipient',
-            type: 'address'
+            type: 'address',
         },
         {
             name: 'amount',
-            type: 'uint256'
+            type: 'uint256',
         },
 
         {
             name: 'actors',
-            type: 'mActors'
+            type: 'mActors',
         },
 
         {
             name: 'txparams',
-            type: 'mTxParams'
-        }
-    ]
+            type: 'mTxParams',
+        },
+    ],
 };
 
 export interface ERC2280Actors {
@@ -127,7 +127,7 @@ export class ERC2280Signer extends EIP712Signer {
                 name: domain_name,
                 version: domain_version,
                 chainId: domain_chain_id,
-                verifyingContract: domain_contract
+                verifyingContract: domain_contract,
             },
             ['mActors', ERC2280Types.mActors],
             ['mTxParams', ERC2280Types.mTxParams],
@@ -153,7 +153,7 @@ export class ERC2280Signer extends EIP712Signer {
                 recipient,
                 amount,
                 actors,
-                txparams
+                txparams,
             }, 'mTransfer')) as Promise<EIP712Signature>;
 
         } else {
@@ -162,7 +162,7 @@ export class ERC2280Signer extends EIP712Signer {
                 recipient,
                 amount,
                 actors,
-                txparams
+                txparams,
             }, 'mTransfer') as EIP712Payload;
 
         }
@@ -183,7 +183,7 @@ export class ERC2280Signer extends EIP712Signer {
             recipient,
             amount,
             actors,
-            txparams
+            txparams,
         }, 'mTransfer') as EIP712Payload;
 
         const signer = utils.getAddress(await this.verify(payload, signature));
@@ -207,7 +207,7 @@ export class ERC2280Signer extends EIP712Signer {
                 spender,
                 amount,
                 actors,
-                txparams
+                txparams,
             }, 'mApprove')) as Promise<EIP712Signature>;
 
         } else {
@@ -216,7 +216,7 @@ export class ERC2280Signer extends EIP712Signer {
                 spender,
                 amount,
                 actors,
-                txparams
+                txparams,
             }, 'mApprove') as EIP712Payload;
 
         }
@@ -237,7 +237,7 @@ export class ERC2280Signer extends EIP712Signer {
             spender,
             amount,
             actors,
-            txparams
+            txparams,
         }, 'mApprove') as EIP712Payload;
 
         const signer = utils.getAddress(await this.verify(payload, signature));
@@ -263,7 +263,7 @@ export class ERC2280Signer extends EIP712Signer {
                 recipient,
                 amount,
                 actors,
-                txparams
+                txparams,
             }, 'mTransferFrom')) as Promise<EIP712Signature>;
 
         } else {
@@ -273,7 +273,7 @@ export class ERC2280Signer extends EIP712Signer {
                 recipient,
                 amount,
                 actors,
-                txparams
+                txparams,
             }, 'mTransferFrom') as EIP712Payload;
 
         }
@@ -296,7 +296,7 @@ export class ERC2280Signer extends EIP712Signer {
             recipient,
             amount,
             actors,
-            txparams
+            txparams,
         }, 'mTransferFrom') as EIP712Payload;
 
         const signer = utils.getAddress(await this.verify(payload, signature));
