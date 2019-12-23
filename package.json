@@ -1,6 +1,6 @@
 {
     "name": "@ticket721/e712",
-    "version": "0.2.0",
+    "version": "0.2.1",
     "description": "Pure Typescript/Javascript implementation of the Ethereum Improvement Proposal 712",
     "keywords": [
         "ethereum",
@@ -51,8 +51,8 @@
         "url": "https://github.com/ticket721/e712/issues"
     },
     "dependencies": {
-        "bn.js": "^5.0.0",
-        "ethers": "^4.0.36"
+        "bn.js": "5.0.0",
+        "ethers": "4.0.41"
     },
     "devDependencies": {
         "@htmlacademy/editorconfig-cli": "^1.0.0",
