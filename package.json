@@ -51,7 +51,7 @@
         "url": "https://github.com/ticket721/e712/issues"
     },
     "dependencies": {
-        "bn.js": "5.0.0",
+        "bn.js": "5.1.0",
         "ethers": "4.0.41"
     },
     "devDependencies": {
