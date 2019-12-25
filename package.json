@@ -1,6 +1,6 @@
 {
     "name": "@ticket721/e712",
-    "version": "0.2.3",
+    "version": "0.2.4",
     "description": "Pure Typescript/Javascript implementation of the Ethereum Improvement Proposal 712",
     "keywords": [
         "ethereum",
@@ -32,6 +32,7 @@
         ]
     },
     "scripts": {
+        "prepare": "npm run build",
         "build": "rm -rf lib && tsc",
         "test": "npm run test:lint && npm run test:editorconfig && npm run test:mocha",
         "test:mocha": "nyc ts-mocha ./sources/**.test.ts",
