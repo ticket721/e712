@@ -25,6 +25,8 @@ jobs:
               run: npm run test:editorconfig
             - name: Run Mocha test suite
               run: npm run test:mocha
+            - name: Run Build
+              run: npm run build
             - name: Coveralls
               uses: coverallsapp/github-action@master
               with:
