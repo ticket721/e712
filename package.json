@@ -59,7 +59,7 @@
         "@htmlacademy/editorconfig-cli": "^1.0.0",
         "@istanbuljs/nyc-config-typescript": "^1.0.0",
         "@types/mocha": "^5.2.7",
-        "@types/node": "^12.12.22",
+        "@types/node": "^13.1.5",
         "chai": "^4.2.0",
         "coveralls": "^3.0.6",
         "eth-sig-util": "^2.4.0",
