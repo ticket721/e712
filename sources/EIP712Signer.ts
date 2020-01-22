@@ -224,6 +224,10 @@ export class EIP712Signer {
 
         let result = [];
 
+        if (type.lastIndexOf('[]') === type.length - 2) {
+            return this._getDependenciesOf(type.slice(0, type.lastIndexOf('[]')), met);
+        }
+
         // If type already found or is not a struct type, stop recursive process
         if (met[type] === true || this.structs[type] === undefined) return result;
 
