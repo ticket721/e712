@@ -1,8 +1,8 @@
 import { EIP712DomainType, EIP712Payload, EIP712Signer, EIP712Signature } from './EIP712Signer';
 import * as ESU                                                           from 'eth-sig-util';
-import { expect }                                                         from 'chai';
-import { Wallet }                                                         from 'ethers';
-import { BN }                                                             from 'bn.js';
+import { expect }        from 'chai';
+import { utils, Wallet } from 'ethers';
+import { BN }            from 'bn.js';
 
 const primaryType = 'Mail';
 
@@ -696,6 +696,67 @@ describe('e712 tests', (): void => {
         };
 
         const signature = await em.sign(ew.privateKey, formatted_payload, true);
+
+        expect(ESU.recoverTypedSignature_v4({
+            data: formatted_payload,
+            sig: signature.hex
+        }).toLowerCase()).to.equal(ew.address.toLowerCase());
+
+    });
+
+    it('sign with custom external signer and verify payload', async (): Promise<void> => {
+
+        const ew = Wallet.createRandom();
+        const em = new EtherMail();
+
+        const formatted_payload = {
+            domain,
+            message: payload,
+            primaryType,
+            types: {
+                ...types,
+                EIP712Domain: EIP712DomainType
+            }
+        };
+
+        const _padWithZeroes = (toPad: string, length: number): string => {
+            let myString = '' + toPad;
+            while (myString.length < length) {
+                myString = '0' + myString;
+            }
+            return myString;
+        };
+
+        const _fromSigned = (num: string): BN => {
+            return new BN(Buffer.from(num.slice(2), 'hex')).fromTwos(256);
+        };
+
+        const _toUnsigned = (num: BN): Buffer => {
+            return Buffer.from(num.toTwos(256).toArray());
+        };
+
+        const signer = async (encodedPayload: string): Promise<EIP712Signature> => {
+
+            const sk = new utils.SigningKey(ew.privateKey);
+
+            const signature = sk.signDigest(Buffer.from(encodedPayload.slice(2), 'hex'));
+
+            const rSig = _fromSigned(signature.r);
+            const sSig = _fromSigned(signature.s);
+            const vSig = signature.v;
+            const rStr = _padWithZeroes(_toUnsigned(rSig).toString('hex'), 64);
+            const sStr = _padWithZeroes(_toUnsigned(sSig).toString('hex'), 64);
+            const vStr = vSig.toString(16);
+
+            return {
+                hex: `0x${rStr}${sStr}${vStr}`,
+                v: vSig,
+                r: rStr,
+                s: sStr
+            };
+        };
+
+        const signature = await em.sign(signer, formatted_payload, true);
 
         expect(ESU.recoverTypedSignature_v4({
             data: formatted_payload,

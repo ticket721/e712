@@ -70,6 +70,8 @@ export const EIP712DomainType = [
  */
 const B32Z = '0x0000000000000000000000000000000000000000000000000000000000000000';
 
+export type ExternalSigner = (encodedPayload: string) => Promise<EIP712Signature>;
+
 /**
  * Helper class that takes types, domain and primary when built and is able to verify provided arguments, sign payload and verify signatures
  * This class should be extended by a custom class.
@@ -462,26 +464,35 @@ export class EIP712Signer {
      * @param payload Payload to sign
      * @param verify True if verifications should be made
      */
-    public async sign(privateKey: string, payload: EIP712Payload, verify: boolean = false): Promise<EIP712Signature> {
-        const sk = new utils.SigningKey(privateKey);
+    public async sign(privateKey: string | ExternalSigner, payload: EIP712Payload, verify: boolean = false): Promise<EIP712Signature> {
 
         const encoded_payload = this.encode(payload, verify);
 
-        const signature = sk.signDigest(Buffer.from(encoded_payload.slice(2), 'hex'));
+        switch (typeof privateKey) {
+            case 'string': {
+                const sk = new utils.SigningKey(privateKey);
 
-        const rSig = this._fromSigned(signature.r);
-        const sSig = this._fromSigned(signature.s);
-        const vSig = signature.v;
-        const rStr = EIP712Signer._padWithZeroes(this._toUnsigned(rSig).toString('hex'), 64);
-        const sStr = EIP712Signer._padWithZeroes(this._toUnsigned(sSig).toString('hex'), 64);
-        const vStr = vSig.toString(16);
+                const signature = sk.signDigest(Buffer.from(encoded_payload.slice(2), 'hex'));
 
-        return {
-            hex: `0x${rStr}${sStr}${vStr}`,
-            v: vSig,
-            r: rStr,
-            s: sStr
-        };
+                const rSig = this._fromSigned(signature.r);
+                const sSig = this._fromSigned(signature.s);
+                const vSig = signature.v;
+                const rStr = EIP712Signer._padWithZeroes(this._toUnsigned(rSig).toString('hex'), 64);
+                const sStr = EIP712Signer._padWithZeroes(this._toUnsigned(sSig).toString('hex'), 64);
+                const vStr = vSig.toString(16);
+
+                return {
+                    hex: `0x${rStr}${sStr}${vStr}`,
+                    v: vSig,
+                    r: rStr,
+                    s: sStr
+                };
+            }
+
+            case 'function': {
+                return privateKey(encoded_payload);
+            }
+        }
     }
 
     /**
