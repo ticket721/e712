@@ -226,7 +226,7 @@ describe('e712 tests', (): void => {
         )
             .to.equal
         (
-            em.encode(formatted_payload)
+            utils.keccak256(Buffer.from(em.encode(formatted_payload).slice(2), 'hex'))
         );
 
     });
@@ -250,7 +250,7 @@ describe('e712 tests', (): void => {
         )
             .to.equal
         (
-            em.encode(formatted_payload, true)
+            utils.keccak256(Buffer.from(em.encode(formatted_payload).slice(2), 'hex'))
         );
 
     });
@@ -275,7 +275,7 @@ describe('e712 tests', (): void => {
         )
             .to.equal
         (
-            em.encode(formatted_payload, true)
+            utils.keccak256(Buffer.from(em.encode(formatted_payload).slice(2), 'hex'))
         );
 
     });
@@ -739,7 +739,8 @@ describe('e712 tests', (): void => {
 
             const sk = new utils.SigningKey(ew.privateKey);
 
-            const signature = sk.signDigest(Buffer.from(encodedPayload.slice(2), 'hex'));
+            const hash = utils.keccak256(Buffer.from(encodedPayload.slice(2), 'hex'));
+            const signature = sk.signDigest(Buffer.from(hash.slice(2), 'hex'));
 
             const rSig = _fromSigned(signature.r);
             const sSig = _fromSigned(signature.s);
