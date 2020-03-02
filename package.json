@@ -1,6 +1,6 @@
 {
     "name": "@ticket721/e712",
-    "version": "0.3.0",
+    "version": "0.4.0",
     "description": "Pure Typescript/Javascript implementation of the Ethereum Improvement Proposal 712",
     "keywords": [
         "ethereum",
