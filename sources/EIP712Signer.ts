@@ -453,7 +453,7 @@ export class EIP712Signer {
             result.push(Buffer.from(this._hashData(payload.primaryType, payload.message).slice(2), 'hex'));
         }
 
-        return utils.keccak256(Buffer.concat(result));
+        return `0x${Buffer.concat(result).toString('hex')}`;
 
     }
 
@@ -472,7 +472,8 @@ export class EIP712Signer {
             case 'string': {
                 const sk = new utils.SigningKey(privateKey);
 
-                const signature = sk.signDigest(Buffer.from(encoded_payload.slice(2), 'hex'));
+                const hashed_payload = utils.keccak256(Buffer.from(encoded_payload.slice(2), 'hex'));
+                const signature = sk.signDigest(Buffer.from(hashed_payload.slice(2), 'hex'));
 
                 const rSig = this._fromSigned(signature.r);
                 const sSig = this._fromSigned(signature.s);
@@ -504,8 +505,9 @@ export class EIP712Signer {
      */
     public async verify(payload: EIP712Payload, signature: string, verify: boolean = false): Promise<string> {
         const encoded_payload = this.encode(payload, verify);
+        const hashed_payload = utils.keccak256(Buffer.from(encoded_payload.slice(2), 'hex'));
 
-        return utils.recoverAddress(Buffer.from(encoded_payload.slice(2), 'hex'), signature);
+        return utils.recoverAddress(Buffer.from(hashed_payload.slice(2), 'hex'), signature);
     }
 
     /**

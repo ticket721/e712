@@ -1,75 +1,75 @@
 import { EIP712DomainType, EIP712Payload, EIP712Signer, EIP712Signature } from './EIP712Signer';
 import * as ESU                                                           from 'eth-sig-util';
-import { expect }        from 'chai';
-import { utils, Wallet } from 'ethers';
-import { BN }            from 'bn.js';
+import { expect }                                                         from 'chai';
+import { utils, Wallet }                                                  from 'ethers';
+import BN                                                                 from 'bn.js';
 
 const primaryType = 'Mail';
 
 const UselessType = [
     {
         name: 'useless',
-        type: 'bool'
-    }
+        type: 'bool',
+    },
 ];
 
 const Person = [
     {
         name: 'name',
-        type: 'string'
+        type: 'string',
     },
     {
         name: 'wallet',
-        type: 'address'
+        type: 'address',
     },
     {
         name: 'usernames',
-        type: 'bytes32[]'
+        type: 'bytes32[]',
     },
     {
         name: 'points',
-        type: 'bytes'
+        type: 'bytes',
     },
     {
         name: 'useless_one',
-        type: 'UselessType'
+        type: 'UselessType',
     },
     {
         name: 'useless_two',
-        type: 'UselessType'
+        type: 'UselessType',
     },
     {
         name: 'integer_value',
-        type: 'uint256'
-    }
+        type: 'uint256',
+    },
 ];
 
 const Mail = [
     {
         name: 'from',
-        type: 'Person'
+        type: 'Person',
     },
     {
         name: 'to',
-        type: 'Person'
+        type: 'Person',
     },
     {
         name: 'contents',
-        type: 'string'
-    }
+        type: 'string',
+    },
 ];
 
 const types = {
     Mail,
     Person,
-    UselessType
+    UselessType,
 };
 
 const domain = {
     name: 'Ether Mail',
     version: '1',
     chainId: 1,
-    verifyingContract: '0xe4937b3fead67f09f5f15b0a1991a588f7be54ca'
+    verifyingContract: '0xe4937b3fead67f09f5f15b0a1991a588f7be54ca',
 };
 
 const payload = {
@@ -79,28 +79,28 @@ const payload = {
         usernames: [],
         points: '0x1243',
         useless_one: {
-            useless: true
+            useless: true,
         },
         useless_two: null,
-        integer_value: new BN(12)
+        integer_value: new BN(12),
     },
     to: {
         name: 'lele',
         wallet: '0xc7449fedabef2cf2749b7c83448fba9bc8dc273d',
         usernames: [
             '0x0000000000000000000000000000000000000000000000000000000000000001',
-            '0x1000000000000000000000000000000000000000000000000000000000000000'
+            '0x1000000000000000000000000000000000000000000000000000000000000000',
         ],
         points: '0xabbc',
         useless_one: {
-            useless: true
+            useless: true,
         },
         useless_two: {
-            useless: false
+            useless: false,
         },
-        integer_value: 12
+        integer_value: 12,
     },
-    contents: 'Hello lele'
+    contents: 'Hello lele',
 };
 
 class UnbuildableEtherMail extends EIP712Signer {
@@ -109,7 +109,7 @@ class UnbuildableEtherMail extends EIP712Signer {
             domain,
             ['Mail', Mail],
             ['Person', Person],
-            ['EIP712Domain', EIP712DomainType]
+            ['EIP712Domain', EIP712DomainType],
         );
     }
 }
@@ -121,7 +121,7 @@ class EtherMail extends EIP712Signer {
             domain,
             ['Mail', Mail],
             ['Person', Person],
-            ['UselessType', UselessType]
+            ['UselessType', UselessType],
         );
     }
 }
@@ -134,20 +134,20 @@ describe('e712 tests', (): void => {
 
         expect
         (
-            (ESU as any).TypedDataUtils.encodeType('Mail', types)
+            (ESU as any).TypedDataUtils.encodeType('Mail', types),
         )
             .to.equal
         (
-            (em as any)._encodeType('Mail')
+            (em as any)._encodeType('Mail'),
         );
 
         expect
         (
-            (ESU as any).TypedDataUtils.encodeType('Person', types)
+            (ESU as any).TypedDataUtils.encodeType('Person', types),
         )
             .to.equal
         (
-            (em as any)._encodeType('Person')
+            (em as any)._encodeType('Person'),
         );
 
     });
@@ -158,20 +158,20 @@ describe('e712 tests', (): void => {
 
         expect
         (
-            '0x' + (ESU as any).TypedDataUtils.hashType('Mail', types).toString('hex')
+            '0x' + (ESU as any).TypedDataUtils.hashType('Mail', types).toString('hex'),
         )
             .to.equal
         (
-            (em as any)._hashType('Mail')
+            (em as any)._hashType('Mail'),
         );
 
         expect
         (
-            '0x' + (ESU as any).TypedDataUtils.hashType('Person', types).toString('hex')
+            '0x' + (ESU as any).TypedDataUtils.hashType('Person', types).toString('hex'),
         )
             .to.equal
         (
-            (em as any)._hashType('Person')
+            (em as any)._hashType('Person'),
         );
 
     });
@@ -182,11 +182,11 @@ describe('e712 tests', (): void => {
 
         expect
         (
-            '0x' + (ESU as any).TypedDataUtils.encodeData('Mail', payload, types).toString('hex')
+            '0x' + (ESU as any).TypedDataUtils.encodeData('Mail', payload, types).toString('hex'),
         )
             .to.equal
         (
-            (em as any)._encodeData('Mail', payload)
+            (em as any)._encodeData('Mail', payload),
         );
 
     });
@@ -197,11 +197,11 @@ describe('e712 tests', (): void => {
 
         expect
         (
-            '0x' + (ESU as any).TypedDataUtils.hashStruct('Mail', payload, types).toString('hex')
+            '0x' + (ESU as any).TypedDataUtils.hashStruct('Mail', payload, types).toString('hex'),
         )
             .to.equal
         (
-            (em as any)._hashData('Mail', payload)
+            (em as any)._hashData('Mail', payload),
         );
 
     });
@@ -216,17 +216,17 @@ describe('e712 tests', (): void => {
             primaryType,
             types: {
                 ...types,
-                EIP712Domain: EIP712DomainType
-            }
+                EIP712Domain: EIP712DomainType,
+            },
         };
 
         expect
         (
-            '0x' + (ESU as any).TypedDataUtils.sign(formatted_payload).toString('hex')
+            '0x' + (ESU as any).TypedDataUtils.sign(formatted_payload).toString('hex'),
         )
             .to.equal
         (
-            em.encode(formatted_payload)
+            utils.keccak256(em.encode(formatted_payload)),
         );
 
     });
@@ -240,17 +240,17 @@ describe('e712 tests', (): void => {
             message: payload,
             primaryType: 'EIP712Domain',
             types: {
-                EIP712Domain: EIP712DomainType
-            }
+                EIP712Domain: EIP712DomainType,
+            },
         };
 
         expect
         (
-            '0x' + (ESU as any).TypedDataUtils.sign(formatted_payload).toString('hex')
+            '0x' + (ESU as any).TypedDataUtils.sign(formatted_payload).toString('hex'),
         )
             .to.equal
         (
-            em.encode(formatted_payload, true)
+            utils.keccak256(em.encode(formatted_payload, true)),
         );
 
     });
@@ -265,17 +265,17 @@ describe('e712 tests', (): void => {
             primaryType,
             types: {
                 ...types,
-                EIP712Domain: EIP712DomainType
-            }
+                EIP712Domain: EIP712DomainType,
+            },
         };
 
         expect
         (
-            '0x' + (ESU as any).TypedDataUtils.sign(formatted_payload).toString('hex')
+            '0x' + (ESU as any).TypedDataUtils.sign(formatted_payload).toString('hex'),
         )
             .to.equal
         (
-            em.encode(formatted_payload, true)
+            utils.keccak256(em.encode(formatted_payload, true)),
         );
 
     });
@@ -290,8 +290,8 @@ describe('e712 tests', (): void => {
             primaryType,
             types: {
                 ...types,
-                EIP712Domain: EIP712DomainType
-            }
+                EIP712Domain: EIP712DomainType,
+            },
         };
 
         // Nothing happens if everything is ok
@@ -308,8 +308,8 @@ describe('e712 tests', (): void => {
             primaryType,
             types: {
                 ...types,
-                EIP712Domain: EIP712DomainType
-            }
+                EIP712Domain: EIP712DomainType,
+            },
         };
 
         expect((): void => {
@@ -326,14 +326,14 @@ describe('e712 tests', (): void => {
             domain: {
                 name: 'Ether Mail',
                 version: '1',
-                chainId: 1
+                chainId: 1,
             },
             message: payload,
             primaryType,
             types: {
                 ...types,
-                EIP712Domain: EIP712DomainType
-            }
+                EIP712Domain: EIP712DomainType,
+            },
         };
 
         expect((): void => {
@@ -352,8 +352,8 @@ describe('e712 tests', (): void => {
             primaryType,
             types: {
                 ...types,
-                EIP712Domain: EIP712DomainType
-            }
+                EIP712Domain: EIP712DomainType,
+            },
         };
 
         expect((): void => {
@@ -375,7 +375,7 @@ describe('e712 tests', (): void => {
                 Person,
                 UselessType,
                 EIP712Domain: EIP712DomainType,
-            }
+            },
         };
 
         expect((): void => {
@@ -398,11 +398,11 @@ describe('e712 tests', (): void => {
                 UselessType: [
                     {
                         name: 'uselesss',
-                        type: 'bool'
-                    }
+                        type: 'bool',
+                    },
                 ],
                 EIP712Domain: EIP712DomainType,
-            }
+            },
         };
 
         expect((): void => {
@@ -424,8 +424,8 @@ describe('e712 tests', (): void => {
                 Person,
                 UselessType,
                 EIP712Domain: EIP712DomainType,
-                MailPerson: []
-            }
+                MailPerson: [],
+            },
         };
 
         expect((): void => {
@@ -450,10 +450,10 @@ describe('e712 tests', (): void => {
                     ...EIP712DomainType,
                     {
                         name: 'name',
-                        type: 'uint256'
-                    }
-                ]
-            }
+                        type: 'uint256',
+                    },
+                ],
+            },
         };
 
         expect((): void => {
@@ -477,10 +477,10 @@ describe('e712 tests', (): void => {
                     ...EIP712DomainType,
                     {
                         name: 'extra',
-                        type: 'uint256'
-                    }
-                ]
-            }
+                        type: 'uint256',
+                    },
+                ],
+            },
         };
 
         expect((): void => {
@@ -497,7 +497,7 @@ describe('e712 tests', (): void => {
             domain,
             message: payload,
             primaryType,
-            types
+            types,
         };
 
         expect((): void => {
@@ -514,15 +514,15 @@ describe('e712 tests', (): void => {
             domain,
             message: {
                 from: payload.from,
-                to: payload.to
+                to: payload.to,
             },
             primaryType,
             types: {
                 ...types,
                 EIP712Domain: [
-                    ...EIP712DomainType
-                ]
-            }
+                    ...EIP712DomainType,
+                ],
+            },
         };
 
         expect((): void => {
@@ -540,15 +540,15 @@ describe('e712 tests', (): void => {
             message: {
                 from: payload.from,
                 to: payload.to,
-                content: payload.contents
+                content: payload.contents,
             },
             primaryType,
             types: {
                 ...types,
                 EIP712Domain: [
-                    ...EIP712DomainType
-                ]
-            }
+                    ...EIP712DomainType,
+                ],
+            },
         };
 
         expect((): void => {
@@ -567,9 +567,9 @@ describe('e712 tests', (): void => {
             primaryType: 'EIP712Domain',
             types: {
                 EIP712Domain: [
-                    ...EIP712DomainType
-                ]
-            }
+                    ...EIP712DomainType,
+                ],
+            },
         };
 
         em.verifyPayload(formatted_payload as any);
@@ -586,19 +586,19 @@ describe('e712 tests', (): void => {
                 ...payload,
                 from: {
                     ...payload.from,
-                    integer_value: 12
+                    integer_value: 12,
                 },
                 to: {
                     ...payload.to,
-                    integer_value: new BN(12)
-                }
+                    integer_value: new BN(12),
+                },
             },
             primaryType: 'EIP712Domain',
             types: {
                 EIP712Domain: [
-                    ...EIP712DomainType
-                ]
-            }
+                    ...EIP712DomainType,
+                ],
+            },
         };
 
         em.verifyPayload(formatted_payload as any);
@@ -616,9 +616,9 @@ describe('e712 tests', (): void => {
             types: {
                 ...types,
                 EIP712Domain: [
-                    ...EIP712DomainType
-                ]
-            }
+                    ...EIP712DomainType,
+                ],
+            },
         };
 
         expect((): void => {
@@ -637,9 +637,9 @@ describe('e712 tests', (): void => {
             types: {
                 ...types,
                 EIP712Domain: [
-                    ...EIP712DomainType
-                ]
-            }
+                    ...EIP712DomainType,
+                ],
+            },
         };
 
         expect((): void => {
@@ -667,15 +667,15 @@ describe('e712 tests', (): void => {
             primaryType,
             types: {
                 ...types,
-                EIP712Domain: EIP712DomainType
-            }
+                EIP712Domain: EIP712DomainType,
+            },
         };
 
         const signature = await em.sign(ew.privateKey, formatted_payload);
 
         expect(ESU.recoverTypedSignature_v4({
             data: formatted_payload,
-            sig: signature.hex
+            sig: signature.hex,
         }).toLowerCase()).to.equal(ew.address.toLowerCase());
 
     });
@@ -691,15 +691,15 @@ describe('e712 tests', (): void => {
             primaryType,
             types: {
                 ...types,
-                EIP712Domain: EIP712DomainType
-            }
+                EIP712Domain: EIP712DomainType,
+            },
         };
 
         const signature = await em.sign(ew.privateKey, formatted_payload, true);
 
         expect(ESU.recoverTypedSignature_v4({
             data: formatted_payload,
-            sig: signature.hex
+            sig: signature.hex,
         }).toLowerCase()).to.equal(ew.address.toLowerCase());
 
     });
@@ -715,8 +715,8 @@ describe('e712 tests', (): void => {
             primaryType,
             types: {
                 ...types,
-                EIP712Domain: EIP712DomainType
-            }
+                EIP712Domain: EIP712DomainType,
+            },
         };
 
         const _padWithZeroes = (toPad: string, length: number): string => {
@@ -739,7 +739,8 @@ describe('e712 tests', (): void => {
 
             const sk = new utils.SigningKey(ew.privateKey);
 
-            const signature = sk.signDigest(Buffer.from(encodedPayload.slice(2), 'hex'));
+            const hashedPayload = utils.keccak256(Buffer.from(encodedPayload.slice(2), 'hex'));
+            const signature = sk.signDigest(Buffer.from(hashedPayload.slice(2), 'hex'));
 
             const rSig = _fromSigned(signature.r);
             const sSig = _fromSigned(signature.s);
@@ -752,7 +753,7 @@ describe('e712 tests', (): void => {
                 hex: `0x${rStr}${sStr}${vStr}`,
                 v: vSig,
                 r: rStr,
-                s: sStr
+                s: sStr,
             };
         };
 
@@ -760,7 +761,7 @@ describe('e712 tests', (): void => {
 
         expect(ESU.recoverTypedSignature_v4({
             data: formatted_payload,
-            sig: signature.hex
+            sig: signature.hex,
         }).toLowerCase()).to.equal(ew.address.toLowerCase());
 
     });
@@ -776,8 +777,8 @@ describe('e712 tests', (): void => {
             primaryType,
             types: {
                 ...types,
-                EIP712Domain: EIP712DomainType
-            }
+                EIP712Domain: EIP712DomainType,
+            },
         };
 
         const signature = ESU.signTypedData_v4(Buffer.from(ew.privateKey.slice(2), 'hex'), {
@@ -799,8 +800,8 @@ describe('e712 tests', (): void => {
             primaryType,
             types: {
                 ...types,
-                EIP712Domain: EIP712DomainType
-            }
+                EIP712Domain: EIP712DomainType,
+            },
         };
 
         const signature = await em.sign(ew.privateKey, formatted_payload, true);
@@ -841,79 +842,79 @@ describe('e712 tests', (): void => {
                 'name': 'Ether Mail',
                 'version': '1',
                 'chainId': 1,
-                'verifyingContract': '0xe4937b3fead67f09f5f15b0a1991a588f7be54ca'
+                'verifyingContract': '0xe4937b3fead67f09f5f15b0a1991a588f7be54ca',
             },
             'message': {
                 'from': {
                     'name': 'lol',
                     'wallet': '0xe4937b3fead67f09f5f15b0a1991a588f7be54ca',
-                    'points': '0x1243'
+                    'points': '0x1243',
                 },
                 'to': {
                     'name': 'lele',
                     'wallet': '0xc7449fedabef2cf2749b7c83448fba9bc8dc273d',
-                    'points': '0xabbc'
+                    'points': '0xabbc',
                 },
-                'contents': 'Hello lele'
+                'contents': 'Hello lele',
             },
             'primaryType': 'Mail',
             'types': {
                 'Mail': [
                     {
                         'name': 'from',
-                        'type': 'Person'
+                        'type': 'Person',
                     },
                     {
                         'name': 'to',
-                        'type': 'Person'
+                        'type': 'Person',
                     },
                     {
                         'name': 'contents',
-                        'type': 'string'
-                    }
+                        'type': 'string',
+                    },
                 ],
                 'Person': [
                     {
                         'name': 'name',
-                        'type': 'string'
+                        'type': 'string',
                     },
                     {
                         'name': 'wallet',
-                        'type': 'address'
+                        'type': 'address',
                     },
                     {
                         'name': 'points',
-                        'type': 'bytes'
-                    }
+                        'type': 'bytes',
+                    },
                 ],
                 'UselessType': [
                     {
                         'name': 'useless',
-                        'type': 'bool'
-                    }
+                        'type': 'bool',
+                    },
                 ],
                 'EIP712Domain': [
                     {
                         'name': 'name',
-                        'type': 'string'
+                        'type': 'string',
                     },
                     {
                         'name': 'version',
-                        'type': 'string'
+                        'type': 'string',
                     },
                     {
                         'name': 'chainId',
-                        'type': 'uint256'
+                        'type': 'uint256',
                     },
                     {
                         'name': 'verifyingContract',
-                        'type': 'address'
-                    }
-                ]
-            }
+                        'type': 'address',
+                    },
+                ],
+            },
         };
 
-        const em = new EIP712Signer(payload.domain, 'Mail', ['Mail', payload.types.Mail], ['Person', payload.types.Person]);
+        const em = new EIP712Signer(payload.domain, ['Mail', payload.types.Mail], ['Person', payload.types.Person]);
 
         expect((await em.verify(payload, signature)).toLowerCase()).to.equal(address.toLowerCase());
 
@@ -928,23 +929,23 @@ describe('e712 tests', (): void => {
         const User = [
             {
                 name: 'firstName',
-                type: 'string'
+                type: 'string',
             },
             {
                 name: 'lastName',
-                type: 'string'
+                type: 'string',
             },
             {
                 name: 'age',
-                type: 'uint256'
-            }
+                type: 'uint256',
+            },
         ];
 
         const domain = {
             name: 'User Infos',
             version: '1',
             chainId: 1,
-            verifyingContract: '0xe4937b3fead67f09f5f15b0a1991a588f7be54ca'
+            verifyingContract: '0xe4937b3fead67f09f5f15b0a1991a588f7be54ca',
         };
 
         const primaryType = 'User';
@@ -959,12 +960,14 @@ describe('e712 tests', (): void => {
             constructor() {
                 super(
                     domain,
-                    ['User', User]
+                    ['User', User],
                 );
             }
 
             setUserInfos(firstName: string, lastName: string, age: number): void {
-                if (!firstName || !lastName || age <= 0) throw new Error('Invalid User Information');
+                if (!firstName || !lastName || age <= 0) {
+                    throw new Error('Invalid User Information');
+                }
 
                 this.firstName = firstName;
                 this.lastName = lastName;
@@ -980,12 +983,14 @@ describe('e712 tests', (): void => {
             }
 
             async getSignerAddress(firstName: string, lastName: string, age: number, signature: string): Promise<string> {
-                if (!firstName || !lastName || age <= 0) throw new Error('Invalid User Information');
+                if (!firstName || !lastName || age <= 0) {
+                    throw new Error('Invalid User Information');
+                }
 
                 const message_paylaod = {
                     firstName: this.firstName,
                     lastName: this.lastName,
-                    age: this.age
+                    age: this.age,
                 };
 
                 const original_payload = this.generatePayload(message_paylaod, 'User');
@@ -997,7 +1002,7 @@ describe('e712 tests', (): void => {
                 const message_paylaod = {
                     firstName: this.firstName,
                     lastName: this.lastName,
-                    age: this.age
+                    age: this.age,
                 };
 
                 return this.generatePayload(message_paylaod, 'User');
