@@ -1,5 +1,5 @@
 export {
-    EIP712Payload, EIP712Signature, EIP712Signer, EIP712DomainType, EIP712Domain, EIP712Struct, EIP712StructField
+    EIP712Payload, EIP712Signature, EIP712Signer, EIP712DomainType, EIP712Domain, EIP712Struct, EIP712StructField, ExternalSigner
 } from './EIP712Signer';
 
 export {
