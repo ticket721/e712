@@ -32,15 +32,17 @@
         ]
     },
     "scripts": {
-        "prepare": "npm run build",
+        "prepare": "yarn build",
         "build": "rm -rf lib && tsc",
-        "test": "npm run test:lint && npm run test:editorconfig && npm run test:mocha",
+        "test": "yarn test:lint && yarn test:editorconfig && yarn test:mocha",
         "test:mocha": "nyc ts-mocha ./sources/**.test.ts",
         "test:lint": "tslint --project .",
         "editorconfig-cli": "editorconfig-cli",
-        "test:editorconfig": "npm run editorconfig-cli",
+        "test:editorconfig": "yarn editorconfig-cli",
         "coverage:upload": "cat ./coverage/lcov.info | coveralls",
-        "doc": "typedoc --theme markdown --excludePrivate --readme ./README.md"
+        "doc": "typedoc --theme markdown --excludePrivate --readme ./README.md",
+        "@lerna/postinstall": "yarn build",
+        "@lerna/postclean": "rm -rf lib"
     },
     "editorconfig-cli": [
         "./package.json",
