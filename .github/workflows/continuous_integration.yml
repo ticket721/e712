@@ -18,15 +18,25 @@ jobs:
               with:
                   node-version: ${{ matrix.node-version }}
             - name: Install dependencies
-              run: npm install
+              uses: borales/actions-yarn@v2.0.0
+              with:
+                  cmd: install
             - name: Run TSLint
-              run: npm run test:lint
+              uses: borales/actions-yarn@v2.0.0
+              with:
+                  cmd: test:lint
             - name: Run Editorconfig
-              run: npm run test:editorconfig
+              uses: borales/actions-yarn@v2.0.0
+              with:
+                  cmd: test:editorconfig
             - name: Run Mocha test suite
-              run: npm run test:mocha
+              uses: borales/actions-yarn@v2.0.0
+              with:
+                  cmd: test:mocha
             - name: Run Build
-              run: npm run build
+              uses: borales/actions-yarn@v2.0.0
+              with:
+                  cmd: build
             - name: Coveralls
               uses: coverallsapp/github-action@master
               with:
