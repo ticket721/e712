@@ -17,26 +17,16 @@ jobs:
               uses: actions/setup-node@v1
               with:
                   node-version: ${{ matrix.node-version }}
-            - name: Set up Python 2.7
-              uses: actions/setup-python@v1
-              with:
-                python-version: 2.7
+            - name: Install Yarn Globally
+              run: npm install -g yarn@1.22.4
             - name: Install dependencies
-              uses: borales/actions-yarn@v2.0.0
-              with:
-                  cmd: install
+              run: yarn install
             - name: Run TSLint
-              uses: borales/actions-yarn@v2.0.0
-              with:
-                  cmd: test:lint
+              run: yarn test:lint
             - name: Run Editorconfig
-              uses: borales/actions-yarn@v2.0.0
-              with:
-                  cmd: test:editorconfig
+              run: yarn test:editorconfig
             - name: Run Mocha test suite
-              uses: borales/actions-yarn@v2.0.0
-              with:
-                  cmd: test:mocha
+              run: yarn test:mocha
             - name: Run Build
               uses: borales/actions-yarn@v2.0.0
               with:
