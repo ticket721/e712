@@ -74,7 +74,7 @@
         "mocha": "^6.2.0",
         "nyc": "^15.0.0",
         "ts-mocha": "^6.0.0",
-        "tslint": "^5.19.0",
+        "tslint": "^6.1.0",
         "typedoc": "^0.15.0",
         "typedoc-plugin-markdown": "^2.1.4",
         "typescript": "^3.5.3"
