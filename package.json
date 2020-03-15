@@ -32,7 +32,6 @@
         ]
     },
     "scripts": {
-        "prepare": "yarn build",
         "build": "rm -rf lib && tsc",
         "test": "yarn test:lint && yarn test:editorconfig && yarn test:mocha",
         "test:mocha": "nyc ts-mocha ./sources/**.test.ts",
@@ -41,6 +40,7 @@
         "test:editorconfig": "yarn editorconfig-cli",
         "coverage:upload": "cat ./coverage/lcov.info | coveralls",
         "doc": "typedoc --theme markdown --excludePrivate --readme ./README.md",
+        "publish": "yarn build && yarn publish",
         "@lerna/postinstall": "yarn build",
         "@lerna/postclean": "rm -rf lib"
     },
