@@ -42,7 +42,7 @@
         "doc": "typedoc --theme markdown --excludePrivate --readme ./README.md",
         "publish": "yarn build && yarn publish",
         "@lerna/postinstall": "yarn build",
-        "@lerna/postclean": "rm -rf lib"
+        "@lerna/postclean": "rm -rf lib && rm -rf node_modules"
     },
     "editorconfig-cli": [
         "./package.json",
