@@ -59,7 +59,7 @@
     },
     "devDependencies": {
         "@commitlint/cli": "^8.2.0",
-        "@commitlint/config-conventional": "^8.2.0",
+        "@commitlint/config-conventional": "^9.1.2",
         "@htmlacademy/editorconfig-cli": "^1.0.0",
         "@istanbuljs/nyc-config-typescript": "^1.0.0",
         "@types/mocha": "^5.2.7",
