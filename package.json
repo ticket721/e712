@@ -67,7 +67,7 @@
         "chai": "^4.2.0",
         "conventional-changelog-cli": "^2.0.12",
         "coveralls": "^3.0.6",
-        "eth-sig-util": "^2.4.0",
+        "eth-sig-util": "^3.0.0",
         "husky": "4.3.0",
         "linted": "^1.0.5",
         "mocha": "^6.2.0",
