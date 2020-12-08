@@ -62,7 +62,7 @@
         "@commitlint/config-conventional": "^8.2.0",
         "@htmlacademy/editorconfig-cli": "^1.0.0",
         "@istanbuljs/nyc-config-typescript": "^1.0.0",
-        "@types/mocha": "^5.2.7",
+        "@types/mocha": "^8.2.0",
         "@types/node": "^12.12.22",
         "chai": "^4.2.0",
         "conventional-changelog-cli": "^2.0.12",
