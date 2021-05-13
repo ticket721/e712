@@ -58,7 +58,7 @@
         "ethers": "4.0.41"
     },
     "devDependencies": {
-        "@commitlint/cli": "^8.2.0",
+        "@commitlint/cli": "^12.1.4",
         "@commitlint/config-conventional": "^8.2.0",
         "@htmlacademy/editorconfig-cli": "^1.0.0",
         "@istanbuljs/nyc-config-typescript": "^1.0.0",
